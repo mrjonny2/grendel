@@ -14,9 +14,6 @@ RUN cp java.security /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/security/java.sec
 
 RUN mvn clean package
 
-RUN java -jar target/grendel-0.4.0-SNAPSHOT.jar schema -c grendel.properties > setup-grendel.sql
-mysql -u grendel -p grendel < setup-grendel.sql
+EXPOSE 8080
 
-RUN java -jar target/grendel-0.4.0-SNAPSHOT.jar schema -c grendel.properties
-
-CMD java -jar target/grendel-0.4.0-SNAPSHOT.jar server -c grendel.properties -p 8080
+ENTRYPOINT java -jar target/grendel-0.4.0-SNAPSHOT.jar server -c grendel.properties -p 8080
